@@ -39,7 +39,7 @@ Complete behavior tree with proper priority system:
 
 1. **Clone or Extract the Project**
    ```bash
-   git clone [your-repository-url]
+   git clone (https://github.com/acc668/IMG420-Assignment-6)
    cd IMG420-Assignment-6
    ```
 
