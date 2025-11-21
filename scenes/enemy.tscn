@@ -1,0 +1,331 @@
+[gd_scene load_steps=50 format=3 uid="uid://15ai8l5mvqhy"]
+
+[ext_resource type="Script" uid="uid://bq3q1att2khdf" path="res://scripts/Enemy.cs" id="1_j0cyh"]
+[ext_resource type="Script" uid="uid://hgs7q3xy5ra2" path="res://scripts/HealthBar.cs" id="2_g0wcc"]
+[ext_resource type="PackedScene" uid="uid://bgyeigatvwxv5" path="res://scenes/ally.tscn" id="2_ile5s"]
+[ext_resource type="Texture2D" uid="uid://bdjswkkc1ohup" path="res://assets/enemy/Attack.png" id="2_shcg2"]
+[ext_resource type="Texture2D" uid="uid://bvrreqdarqubd" path="res://assets/enemy/Idle.png" id="3_ile5s"]
+[ext_resource type="Script" uid="uid://hw12in6xqnug" path="res://scripts/behaviortree/composites/BTSelector.cs" id="3_s1ycm"]
+[ext_resource type="Texture2D" uid="uid://xdiadn1omwgd" path="res://assets/enemy/Walk.png" id="4_1x4g4"]
+[ext_resource type="Script" uid="uid://bf6tohl4gtid6" path="res://scripts/behaviortree/composites/BTSequence.cs" id="4_shcg2"]
+[ext_resource type="Script" uid="uid://bjwj4hux0s352" path="res://scripts/behaviortree/conditions/BTIsHealthCritical.cs" id="5_ile5s"]
+[ext_resource type="Script" uid="uid://1db8131eioa2" path="res://scripts/behaviortree/actions/BTFlee.cs" id="6_1x4g4"]
+[ext_resource type="Script" uid="uid://jel8gvxvhq03" path="res://scripts/behaviortree/conditions/BTIsHealthLow.cs" id="7_2pwtc"]
+[ext_resource type="Script" uid="uid://b21j4s1euncvr" path="res://scripts/behaviortree/conditions/BTAreAlliesAvailable.cs" id="8_rogs8"]
+[ext_resource type="Script" uid="uid://dd6pdae02swqr" path="res://scripts/behaviortree/actions/BTSummonAlly.cs" id="9_wrm80"]
+[ext_resource type="Script" uid="uid://bu50gw0tqsc71" path="res://scripts/behaviortree/conditions/BTIsPlayerInRange.cs" id="10_6awcb"]
+[ext_resource type="Script" uid="uid://rc5g3bpmgaww" path="res://scripts/behaviortree/conditions/BTCanAttack.cs" id="11_wjec0"]
+[ext_resource type="Script" uid="uid://h5urauc5fav1" path="res://scripts/behaviortree/actions/BTAttack.cs" id="12_i4rgx"]
+[ext_resource type="Script" uid="uid://b45dpb4uxgei2" path="res://scripts/behaviortree/actions/BTChasePlayer.cs" id="13_2mchx"]
+[ext_resource type="Script" uid="uid://dldo5k0dc30j3" path="res://scripts/behaviortree/actions/BTPatrol.cs" id="14_t3vcr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pwtc"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rogs8"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrm80"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6awcb"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjec0"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4rgx"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mchx"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3vcr"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaulx"]
+atlas = ExtResource("2_shcg2")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f82d"]
+atlas = ExtResource("3_ile5s")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lioqc"]
+atlas = ExtResource("3_ile5s")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lg75"]
+atlas = ExtResource("3_ile5s")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsnsy"]
+atlas = ExtResource("3_ile5s")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thsr5"]
+atlas = ExtResource("3_ile5s")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekh6n"]
+atlas = ExtResource("3_ile5s")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sbpf"]
+atlas = ExtResource("3_ile5s")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78kod"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_605iw"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6q4o"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tuss"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v6cf"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vab5u"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiusc"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ie7m"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya47j"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyejq"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0dkt"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdxul"]
+atlas = ExtResource("4_1x4g4")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qaulx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pwtc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rogs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrm80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6awcb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjec0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4rgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mchx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3vcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qaulx")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f82d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lioqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lg75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsnsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thsr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekh6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sbpf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78kod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_605iw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6q4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tuss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v6cf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vab5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qiusc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ie7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya47j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyejq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0dkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdxul")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7lhw"]
+size = Vector2(71, 72)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lioqc"]
+radius = 200.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_j0cyh")
+AllyScene = ExtResource("2_ile5s")
+PatrolPoints = Array[Vector2]([Vector2(0, 0), Vector2(0, 0)])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_qaulx")
+animation = &"attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.5, 28)
+shape = SubResource("RectangleShape2D_e7lhw")
+
+[node name="HealthBar" type="Node2D" parent="."]
+script = ExtResource("2_g0wcc")
+
+[node name="StateLabel" type="Label" parent="."]
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = -17.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+visible = false
+shape = SubResource("CircleShape2D_lioqc")
+
+[node name="BehaviorTree" type="Node" parent="."]
+script = ExtResource("3_s1ycm")
+
+[node name="EmergencyFlee" type="Node" parent="BehaviorTree"]
+script = ExtResource("4_shcg2")
+
+[node name="IsHealthCritical" type="Node" parent="BehaviorTree/EmergencyFlee"]
+script = ExtResource("5_ile5s")
+
+[node name="Flee" type="Node" parent="BehaviorTree/EmergencyFlee"]
+script = ExtResource("6_1x4g4")
+
+[node name="CallForHelp" type="Node" parent="BehaviorTree"]
+script = ExtResource("4_shcg2")
+
+[node name="IsHealthLow" type="Node" parent="BehaviorTree/CallForHelp"]
+script = ExtResource("7_2pwtc")
+
+[node name="AreAlliesAvailable" type="Node" parent="BehaviorTree/CallForHelp"]
+script = ExtResource("8_rogs8")
+
+[node name="SummonAlly" type="Node" parent="BehaviorTree/CallForHelp"]
+script = ExtResource("9_wrm80")
+
+[node name="Combat" type="Node" parent="BehaviorTree"]
+script = ExtResource("4_shcg2")
+
+[node name="IsPlayerDetected" type="Node" parent="BehaviorTree/Combat"]
+script = ExtResource("10_6awcb")
+
+[node name="CombatOptions" type="Node" parent="BehaviorTree/Combat"]
+script = ExtResource("3_s1ycm")
+
+[node name="AttackSequence" type="Node" parent="BehaviorTree/Combat/CombatOptions"]
+script = ExtResource("4_shcg2")
+
+[node name="IsPlayerInAttackRange" type="Node" parent="BehaviorTree/Combat/CombatOptions/AttackSequence"]
+script = ExtResource("10_6awcb")
+CheckAttackRange = true
+
+[node name="CanAttack" type="Node" parent="BehaviorTree/Combat/CombatOptions/AttackSequence"]
+script = ExtResource("11_wjec0")
+
+[node name="Attack" type="Node" parent="BehaviorTree/Combat/CombatOptions/AttackSequence"]
+script = ExtResource("12_i4rgx")
+
+[node name="ChaseSequence" type="Node" parent="BehaviorTree/Combat/CombatOptions"]
+script = ExtResource("4_shcg2")
+
+[node name="ChasePlayer" type="Node" parent="BehaviorTree/Combat/CombatOptions/ChaseSequence"]
+script = ExtResource("13_2mchx")
+
+[node name="PatrolSequence" type="Node" parent="BehaviorTree"]
+script = ExtResource("4_shcg2")
+
+[node name="Patrol" type="Node" parent="BehaviorTree/PatrolSequence"]
+script = ExtResource("14_t3vcr")
