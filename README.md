@@ -428,10 +428,10 @@ Benefits:
 ## Credits
 
 **Assets**:
-- Enemy sprite: [Source if applicable]
-- Player sprite: [Source if applicable]
-- Ally sprite: 
-- Tile assets: [Source if applicable]
+- Enemy sprite: (https://craftpix.net/freebies/free-schoolgirls-anime-character-pixel-sprite-pack/)
+- Player sprite: (https://craftpix.net/freebies/free-schoolgirls-anime-character-pixel-sprite-pack/)
+- Ally sprite: (https://craftpix.net/freebies/free-schoolgirls-anime-character-pixel-sprite-pack/)
+- Tile assets: (https://craftpix.net/freebies/free-village-pixel-tileset-for-top-down-defense/)
 
 ## Conclusion
 
